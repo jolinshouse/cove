@@ -104,6 +104,12 @@
   @keyframes pulse-soft { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.04); } }
   @keyframes orbit-spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
   @keyframes dot-float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-3px); } }
+  @keyframes toast-in { 0% { transform: translate(-50%, 8px); opacity: 0; } 100% { transform: translate(-50%, 0); opacity: 1; } }
+  @keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+
+  /* Tap card press feedback — used on every tappable card */
+  .tap-card { transition: transform .15s ease, box-shadow .2s ease; }
+  .tap-card:active { transform: scale(.985); box-shadow: 0 4px 12px rgba(0,0,0,.10); }
 
   /* Mascot eye movement */
   @keyframes eye-look {
@@ -144,6 +150,8 @@
 <script type="text/babel" src="src/screens-learning.jsx"></script>
 <script type="text/babel" src="src/screens-practice.jsx"></script>
 <script type="text/babel" src="src/screens-mindspace.jsx"></script>
+<script type="text/babel" src="src/screens-onboarding.jsx"></script>
+<script type="text/babel" src="src/screens-plan.jsx"></script>
 <script type="text/babel" src="src/app.jsx"></script>
 </body>
 </html>

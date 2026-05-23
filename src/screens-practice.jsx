@@ -89,7 +89,7 @@ const ChoosePathScreen = ({ go, onChangeTab, openAI }) => {
             {mode === "budget" ? "Continue This Path" : "Launch Simulator"}
           </PrimaryButton>
         </div>
-        <SparkleButton onClick={openAI} floating={false}/>
+        <SparkleButton onClick={openAI} floating={false} variant="inline"/>
       </div>
       <BottomNav active="learn" onChange={onChangeTab}/>
     </div>
@@ -267,7 +267,7 @@ const SimulationScreen = ({ go, onChangeTab, openAI }) => {
             </PrimaryButton>
           )}
         </div>
-        <SparkleButton onClick={openAI} floating={false}/>
+        <SparkleButton onClick={openAI} floating={false} variant="inline"/>
       </div>
       <BottomNav active="learn" onChange={onChangeTab}/>
     </div>

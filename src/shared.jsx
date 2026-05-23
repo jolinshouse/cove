@@ -24,7 +24,7 @@ const IconMic = (p) => <Icon {...p}>
 </Icon>;
 const IconSearch = (p) => <Icon {...p}><circle cx="11" cy="11" r="7" /><line x1="20" y1="20" x2="16.65" y2="16.65" /></Icon>;
 const IconUser = (p) => <Icon {...p}><circle cx="12" cy="8" r="4" /><path d="M4 21a8 8 0 0 1 16 0" /></Icon>;
-const IconFlame = (p) => <Icon {...p} fill="currentColor" stroke="none">
+const IconFlame = (p) => <Icon {...p}>
   <path d="M12 2c.5 3-1.5 4.5-3 6.5-1.6 2.2-2 4-2 5.5a5 5 0 0 0 10 0c0-2-1-3.5-2-5 .5 1 .5 2 0 3a2 2 0 0 1-3-1.5C12 8 14 6 12 2Z" />
 </Icon>;
 const IconDollar = (p) => <Icon {...p}>
@@ -37,7 +37,7 @@ const IconTrash = (p) => <Icon {...p}>
   <path d="M10 11v6M14 11v6" />
   <path d="M9 6V4a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v2" />
 </Icon>;
-const IconDrag = (p) => <Icon {...p} fill="currentColor" stroke="none">
+const IconDrag = (p) => <Icon {...p}>
   <circle cx="9" cy="6" r="1.4" /><circle cx="9" cy="12" r="1.4" /><circle cx="9" cy="18" r="1.4" />
   <circle cx="15" cy="6" r="1.4" /><circle cx="15" cy="12" r="1.4" /><circle cx="15" cy="18" r="1.4" />
 </Icon>;
@@ -45,7 +45,7 @@ const IconCards = (p) => <Icon {...p}><rect x="6" y="4" width="12" height="16" r
 const IconPlay = (p) => <Icon {...p}><polygon points="6 4 20 12 6 20 6 4" fill="currentColor" /></Icon>;
 const IconSettings = (p) => <Icon {...p}>
   <line x1="3" y1="7" x2="21" y2="7" /><line x1="3" y1="17" x2="21" y2="17" />
-  <circle cx="9" cy="7" r="2.4" fill="currentColor" stroke="none" /><circle cx="15" cy="17" r="2.4" fill="currentColor" stroke="none" />
+  <circle cx="9" cy="7" r="2.4" /><circle cx="15" cy="17" r="2.4" />
 </Icon>;
 const IconSparkle = ({ size = 24, color = "#fff" }) => (
   <svg width={size} height={size} viewBox="0 0 24 24" fill={color}>
@@ -77,13 +77,42 @@ const IconMindspace = ({ size = 24, color = "currentColor", active=false }) => (
     <circle cx="12" cy="12" r="9" />
   </svg>
 );
+/* Bottom-nav icons (custom asset set) */
+const IconNavDashboard = ({ size = 32, color = "#949494" }) => (
+  <svg width={size} height={size} viewBox="0 0 32 32" fill="none">
+    <path d="M28 28H10.4C8.15979 28 7.03968 28 6.18404 27.564C5.43139 27.1805 4.81947 26.5687 4.43597 25.816C4 24.9603 4 23.8403 4 21.6V4M20 13.3333V22.6667M9.33333 17.3333V22.6667M25.3333 6.66667V22.6667M14.6667 9.33333V22.6667"
+          stroke={color} strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"/>
+  </svg>
+);
+const IconNavPlan = ({ size = 32, color = "#949494" }) => (
+  <svg width={size} height={size} viewBox="0 0 32 32" fill="none">
+    <path d="M20 12L16.6666 15.3333M20 12V8L24 4V8H28L24 12H20Z" stroke={color} strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"/>
+    <path d="M16.44 4H16C13.6266 4 11.3066 4.70379 9.33316 6.02236C7.35977 7.34094 5.8217 9.21509 4.91345 11.4078C4.0052 13.6005 3.76756 16.0133 4.23058 18.3411C4.6936 20.6689 5.83649 22.8071 7.51472 24.4853C9.19295 26.1635 11.3312 27.3064 13.6589 27.7694C15.9867 28.2324 18.3995 27.9948 20.5922 27.0866C22.7849 26.1783 24.6591 24.6402 25.9776 22.6668C27.2962 20.6935 28 18.3734 28 16C28 15.8533 28 15.7067 28 15.56"
+          stroke={color} strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"/>
+    <path d="M22.5334 17.3333C22.2922 18.5132 21.7359 19.6057 20.9237 20.4948C20.1114 21.3839 19.0735 22.0364 17.9202 22.383C16.7668 22.7295 15.5412 22.7572 14.3734 22.463C13.2056 22.1689 12.1393 21.5639 11.2877 20.7123C10.4362 19.8608 9.83117 18.7945 9.53701 17.6267C9.24286 16.4589 9.27053 15.2332 9.61707 14.0799C9.96361 12.9265 10.6161 11.8886 11.5052 11.0763C12.3943 10.2641 13.4868 9.70782 14.6667 9.46666"
+          stroke={color} strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"/>
+  </svg>
+);
+const IconNavLearn = ({ size = 32, color = "#949494" }) => (
+  <svg width={size} height={size} viewBox="0 0 32 32" fill="none">
+    <path d="M24.9608 11.5584C24.9609 10.3687 24.7243 9.19087 24.2644 8.09366C23.8044 6.99645 23.1308 6.00185 22.2824 5.16779C21.434 4.33375 20.4281 3.67699 19.3232 3.23585C18.2184 2.7947 17.0367 2.57803 15.8472 2.59842C13.5637 2.66633 11.3894 3.59173 9.7575 5.19045C8.12556 6.78918 7.15562 8.94395 7.04079 11.2256C6.98621 12.7482 7.32075 14.2595 8.01282 15.6168C8.70489 16.974 9.73163 18.1324 10.996 18.9824C11.3523 19.2141 11.6454 19.5308 11.8487 19.9039C12.0521 20.2771 12.1593 20.695 12.1608 21.12V23.0784H19.8408V21.12C19.8408 20.6962 19.9461 20.279 20.1472 19.9059C20.3483 19.5328 20.6389 19.2155 20.9928 18.9824C22.2116 18.1646 23.211 17.0598 23.9029 15.7654C24.5949 14.4709 24.9581 13.0262 24.9608 11.5584Z"
+          stroke={color} strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"/>
+    <path d="M19.84 26.9312C18.7322 27.762 17.3849 28.2112 16 28.2112C14.6152 28.2112 13.2678 27.762 12.16 26.9312"
+          stroke={color} strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"/>
+  </svg>
+);
+const IconNavMindspace = ({ size = 32, color = "#949494" }) => (
+  <svg width={size} height={size} viewBox="0 0 32 32" fill="none">
+    <circle cx="16" cy="16" r="13" stroke={color} strokeWidth="3" strokeLinecap="round" strokeDasharray="1 6"/>
+  </svg>
+);
 const IconGroceries = (p) => <Icon {...p}>
   <path d="M5 8h14l-1.5 11a2 2 0 0 1-2 1.8H8.5A2 2 0 0 1 6.5 19L5 8Z" />
   <path d="M8 8a4 4 0 0 1 8 0" />
   <path d="M9 13a3 3 0 0 0 6 0" />
 </Icon>;
 const IconPizza = (p) => <Icon {...p}>
-  <path d="M3 4l18 6-8 11Z" /><circle cx="11" cy="9" r="1" fill="currentColor" /><circle cx="14" cy="14" r="1" fill="currentColor" />
+  <path d="M3 4l18 6-8 11Z" /><circle cx="11" cy="9" r="1" /><circle cx="14" cy="14" r="1" />
 </Icon>;
 const IconCoffee = (p) => <Icon {...p}>
   <path d="M5 8h12v6a4 4 0 0 1-4 4H9a4 4 0 0 1-4-4V8Z" />
@@ -98,7 +127,7 @@ const IconTransport = (p) => <Icon {...p}>
 const IconSmile = (p) => <Icon {...p}>
   <circle cx="12" cy="12" r="9" />
   <path d="M8 14c1 1.5 2.4 2.4 4 2.4S15 15.5 16 14" />
-  <circle cx="9" cy="10" r=".9" fill="currentColor" /><circle cx="15" cy="10" r=".9" fill="currentColor" />
+  <circle cx="9" cy="10" r=".9" /><circle cx="15" cy="10" r=".9" />
 </Icon>;
 const IconScale = (p) => <Icon {...p}>
   <line x1="12" y1="4" x2="12" y2="20" />
@@ -108,16 +137,19 @@ const IconScale = (p) => <Icon {...p}>
 </Icon>;
 const IconPie = (p) => <Icon {...p}>
   <path d="M12 3v9h9a9 9 0 1 1-9-9Z" />
-  <path d="M14 3a7 7 0 0 1 7 7h-7V3Z" fill="currentColor" stroke="none" opacity="0.18" />
+  <path d="M14 3a7 7 0 0 1 7 7h-7V3Z" />
 </Icon>;
 const IconBag = (p) => <Icon {...p}>
   <path d="M6 8h12l-1 12a2 2 0 0 1-2 2H9a2 2 0 0 1-2-2L6 8Z" />
   <path d="M9 8a3 3 0 0 1 6 0" />
-  <path d="M11 13h2v2h-2z" fill="currentColor" stroke="none" />
+  <path d="M11 13h2v2h-2z" />
 </Icon>;
 const IconSwap = (p) => <Icon {...p}>
   <polyline points="6 8 3 11 6 14" /><line x1="3" y1="11" x2="14" y2="11" />
   <polyline points="18 10 21 13 18 16" /><line x1="21" y1="13" x2="10" y2="13" />
+</Icon>;
+const IconBookmark = ({ filled = false, ...p }) => <Icon {...p} fill={filled ? "currentColor" : "none"}>
+  <path d="M6 4a1 1 0 0 1 1-1h10a1 1 0 0 1 1 1v17l-6-4-6 4V4Z" />
 </Icon>;
 const IconBack = IconChevronLeft;
 
@@ -199,11 +231,14 @@ const EmotionMascot = ({ color = "var(--teal-300)", ringColors, size = 280 }) =>
 /* ------------------------- Bottom Nav ------------------------- */
 
 const NAV_ITEMS = [
-  { key: "dashboard", label: "Dashboard", icon: IconBars },
-  { key: "plan", label: "Plan", icon: IconTarget },
-  { key: "learn", label: "Learn", icon: IconBulb },
-  { key: "mindspace", label: "Mindspace", icon: IconMindspace },
+  { key: "dashboard", label: "Dashboard", icon: IconNavDashboard },
+  { key: "plan",      label: "Plan",      icon: IconNavPlan },
+  { key: "learn",     label: "Learn",     icon: IconNavLearn },
+  { key: "mindspace", label: "Mindspace", icon: IconNavMindspace },
 ];
+
+const NAV_ACTIVE = "#00A991";
+const NAV_INACTIVE = "#949494";
 
 const BottomNav = ({ active, onChange }) => (
   <div style={{
@@ -219,14 +254,14 @@ const BottomNav = ({ active, onChange }) => (
     {NAV_ITEMS.map(it => {
       const isActive = active === it.key;
       const Ic = it.icon;
+      const c = isActive ? NAV_ACTIVE : NAV_INACTIVE;
       return (
         <button key={it.key} onClick={() => onChange?.(it.key)} style={{
           flex: 1, border: 0, background: "transparent", cursor: "pointer",
           display: "flex", flexDirection: "column", alignItems: "center", gap: 4,
-          color: isActive ? "var(--teal-500)" : "var(--ink-mute)",
-          padding: 0,
+          color: c, padding: 0,
         }}>
-          <Ic size={26} color={isActive ? "var(--teal-500)" : "var(--ink-mute)"} {...(it.key === "mindspace" ? { active: isActive } : {})} />
+          <Ic size={26} color={c}/>
           <span style={{ fontSize: 13, fontWeight: isActive ? 700 : 500, letterSpacing: -0.1 }}>{it.label}</span>
         </button>
       );
@@ -301,19 +336,24 @@ const PhoneFrame = ({ children, background = "var(--bg-soft)" }) => {
 
 /* ------------------------- Floating sparkle button ------------------------- */
 
-const SparkleButton = ({ onClick, color = "var(--teal-300)", floating = true, bottom = 100, right = 18 }) => (
-  <button onClick={onClick} aria-label="Open AI assistant" style={{
-    position: floating ? "absolute" : "relative",
-    bottom: floating ? bottom : "auto", right: floating ? right : "auto",
-    width: 56, height: 56, borderRadius: "50%",
-    background: color, border: 0, color: "#fff", cursor: "pointer",
-    display: "grid", placeItems: "center",
-    boxShadow: "0 8px 24px rgba(0,135,116,.35)",
-    zIndex: 55,
-  }}>
-    <IconSparkle size={26} color="#fff" />
-  </button>
-);
+const SparkleButton = ({ onClick, color = "var(--teal-300)", floating = true, bottom = 100, right = 18, variant = "solid" }) => {
+  const inline = variant === "inline";
+  return (
+    <button onClick={onClick} aria-label="Open AI assistant" style={{
+      position: floating ? "absolute" : "relative",
+      bottom: floating ? bottom : "auto", right: floating ? right : "auto",
+      width: inline ? 44 : 56, height: inline ? 44 : 56, borderRadius: "50%",
+      background: inline ? "#fff" : color,
+      border: inline ? "1px solid var(--teal-100)" : 0,
+      color: inline ? color : "#fff", cursor: "pointer",
+      display: "grid", placeItems: "center",
+      boxShadow: inline ? "0 1px 3px rgba(0,0,0,.06)" : "0 8px 24px rgba(0,135,116,.35)",
+      zIndex: 55,
+    }}>
+      <IconSparkle size={inline ? 22 : 26} color={inline ? color : "#fff"} />
+    </button>
+  );
+};
 
 /* ------------------------- AI Input bar (reusable, can mount inline or as overlay) ------------------------- */
 
@@ -348,9 +388,9 @@ const iconBtn = (extra) => ({
   display: "grid", placeItems: "center", cursor: "pointer", padding: 0, ...extra,
 });
 
-/* ------------------------- AI Overlay (bottom sheet) ------------------------- */
+/* ------------------------- Bottom sheet (generic) + AI Overlay ------------------------- */
 
-const AIOverlay = ({ open, onClose, color = "var(--teal-300)", placeholder = "Focus more on ETF learning" }) => (
+const InfoSheet = ({ open, onClose, children }) => (
   <>
     <div onClick={onClose} style={{
       position: "absolute", inset: 0, background: "rgba(0,0,0,.16)",
@@ -367,11 +407,194 @@ const AIOverlay = ({ open, onClose, color = "var(--teal-300)", placeholder = "Fo
       zIndex: 95,
     }}>
       <div style={{ width: 40, height: 4, borderRadius: 4, background: "rgb(220,220,220)", margin: "0 auto 14px" }}/>
-      <div style={{ fontSize: 13, color: "var(--ink-soft)", marginBottom: 10, paddingLeft: 4 }}>Ask Cove anything</div>
-      <AIBar placeholder={placeholder} color={color} onSubmit={() => onClose?.()}/>
+      {children}
     </div>
   </>
 );
+
+const AIOverlay = ({ open, onClose, color = "var(--teal-300)", placeholder = "Focus more on ETF learning" }) => (
+  <InfoSheet open={open} onClose={onClose}>
+    <div style={{ fontSize: 13, color: "var(--ink-soft)", marginBottom: 10, paddingLeft: 4 }}>Ask Cove anything</div>
+    <AIBar placeholder={placeholder} color={color} onSubmit={() => onClose?.()}/>
+  </InfoSheet>
+);
+
+/* ------------------------- StatPill (shared between Learn + Mindspace) ------------------------- */
+
+const StatPill = ({ icon, label, value, compact = false }) => (
+  <div style={{
+    display: "inline-flex", alignItems: "center", gap: compact ? 8 : 14,
+    background: "#fff", padding: compact ? "8px 14px" : "12px 22px", borderRadius: 999,
+    boxShadow: "0 2px 8px rgba(0,0,0,.05)",
+    width: "fit-content", minWidth: compact ? 0 : 220,
+  }}>
+    {icon}
+    <span style={{ fontWeight: 500, fontSize: compact ? 13 : 15, color: "#111" }}>{label}</span>
+    <span style={{ fontWeight: 700, fontSize: compact ? 15 : 18, color: "var(--navy-900)" }}>{value}</span>
+  </div>
+);
+
+/* ------------------------- FormatBadge (content-type indicator) ------------------------- */
+
+const FORMAT_META = {
+  read:                { Icon: IconCards, label: "Read",               disabled: false },
+  interactive:         { Icon: IconPlay,  label: "Interactive",        disabled: false },
+  "interactive-video": { Icon: IconPlay,  label: "Interactive video",  disabled: false },
+  audio:               { Icon: IconMic,   label: "Audio · coming soon", disabled: true },
+};
+
+const FormatBadge = ({ format = "read", duration, color = "var(--teal-500)" }) => {
+  const meta = FORMAT_META[format] || FORMAT_META.read;
+  const tone = meta.disabled ? "var(--ink-mute)" : color;
+  return (
+    <div style={{
+      display: "inline-flex", alignItems: "center", gap: 8,
+      fontSize: 13, fontWeight: 600, color: tone,
+    }}>
+      <meta.Icon size={16} color={tone}/>
+      <span>{meta.label}</span>
+      {duration && (
+        <>
+          <span style={{ width: 1, height: 12, background: "var(--ink-mute)", opacity: .4 }}/>
+          <span style={{ fontWeight: 500 }}>{duration}</span>
+        </>
+      )}
+    </div>
+  );
+};
+
+/* ------------------------- SourceFooter (credibility signal) ------------------------- */
+
+const SourceFooter = ({ sources = [] }) => {
+  const [open, setOpen] = useState(false);
+  if (!sources.length) return null;
+  return (
+    <>
+      <button onClick={() => setOpen(true)} style={{
+        display: "inline-flex", alignItems: "center", gap: 6,
+        background: "transparent", border: 0, padding: "8px 0",
+        color: "var(--ink-soft)", fontSize: 12, fontWeight: 500,
+        cursor: "pointer", fontFamily: "inherit",
+      }}>
+        <IconInfo size={14} color="var(--ink-soft)"/>
+        <span>Sources ({sources.length})</span>
+      </button>
+      <InfoSheet open={open} onClose={() => setOpen(false)}>
+        <div style={{ fontSize: 16, fontWeight: 700, color: "var(--navy-900)", marginBottom: 4 }}>Sources</div>
+        <p style={{ margin: "0 0 14px", fontSize: 13, color: "var(--ink-soft)" }}>
+          Cove pulls financial-literacy content from publicly recognized educators and regulators.
+        </p>
+        <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
+          {sources.map((s, i) => (
+            <div key={i} style={{
+              display: "flex", flexDirection: "column", gap: 2,
+              background: "var(--teal-50)", borderRadius: 12, padding: "10px 14px",
+            }}>
+              <span style={{ fontSize: 14, fontWeight: 600, color: "var(--navy-900)" }}>{s.name}</span>
+              <span style={{ fontSize: 12, color: "var(--teal-700)" }}>{s.url}</span>
+            </div>
+          ))}
+        </div>
+      </InfoSheet>
+    </>
+  );
+};
+
+/* ------------------------- MoodLegend (mood color/emoji key) ------------------------- */
+
+const MOOD_KEY = [
+  { name: "overwhelmed", color: "rgb(255, 120, 100)", emoji: "😣" },
+  { name: "anxious",     color: "var(--teal-300)",    emoji: "😟" },
+  { name: "stressed",    color: "var(--blue-500)",    emoji: "😩" },
+  { name: "calm",        color: "var(--purple-500)",  emoji: "😌" },
+  { name: "hopeful",     color: "var(--teal-500)",    emoji: "🙂" },
+];
+
+const MoodLegend = ({ defaultOpen = false, compact = false }) => {
+  const [open, setOpen] = useState(defaultOpen);
+  return (
+    <div style={{
+      background: "rgba(255,255,255,.7)", borderRadius: 14, padding: "10px 12px",
+      border: "1px solid var(--line)",
+    }}>
+      <button onClick={() => setOpen(o => !o)} style={{
+        display: "flex", width: "100%", alignItems: "center", justifyContent: "space-between",
+        background: "transparent", border: 0, padding: 0, cursor: "pointer", fontFamily: "inherit",
+        color: "var(--ink-soft)", fontSize: 12, fontWeight: 600, letterSpacing: .2,
+      }}>
+        <span>{open ? "Hide key" : "Show key"}</span>
+        <span style={{ fontSize: 11, color: "var(--ink-mute)" }}>{open ? "▴" : "▾"}</span>
+      </button>
+      {open && (
+        <div style={{
+          marginTop: 10, display: "flex", flexWrap: "wrap", gap: compact ? 6 : 10,
+        }}>
+          {MOOD_KEY.map(m => (
+            <div key={m.name} style={{
+              display: "inline-flex", alignItems: "center", gap: 6,
+              fontSize: 12, color: "#111",
+            }}>
+              <span style={{
+                width: 14, height: 14, borderRadius: "50%", background: m.color,
+                display: "inline-block",
+              }}/>
+              <span>{m.emoji}</span>
+              <span style={{ fontWeight: 500 }}>{m.name}</span>
+            </div>
+          ))}
+        </div>
+      )}
+    </div>
+  );
+};
+
+/* ------------------------- BreathingGuide (box-breathing overlay) ------------------------- */
+
+const BreathingGuide = ({ open, onClose }) => {
+  const PHASES = ["Breathe in", "Hold", "Breathe out", "Hold"];
+  const [phase, setPhase] = useState(0);
+  useEffect(() => {
+    if (!open) { setPhase(0); return; }
+    const id = setInterval(() => setPhase(p => (p + 1) % 4), 4000);
+    return () => clearInterval(id);
+  }, [open]);
+  const scale = phase === 0 ? 1.5 : phase === 1 ? 1.5 : phase === 2 ? 1 : 1;
+  return (
+    <>
+      <div onClick={onClose} style={{
+        position: "absolute", inset: 0, background: "rgba(0,30,40,.55)",
+        backdropFilter: "blur(6px)",
+        opacity: open ? 1 : 0, pointerEvents: open ? "auto" : "none",
+        transition: "opacity .35s ease", zIndex: 100,
+      }}/>
+      <div style={{
+        position: "absolute", inset: 0, display: open ? "flex" : "none",
+        flexDirection: "column", alignItems: "center", justifyContent: "center",
+        gap: 40, zIndex: 105, pointerEvents: "none",
+      }}>
+        <div style={{
+          width: 180, height: 180, borderRadius: "50%",
+          background: "radial-gradient(circle, var(--blue-200), var(--blue-500))",
+          transform: `scale(${scale})`,
+          transition: "transform 4s cubic-bezier(.4,0,.4,1)",
+          boxShadow: "0 0 60px rgba(43,127,255,.4)",
+        }}/>
+        <div key={phase} style={{
+          fontSize: 28, fontWeight: 500, color: "#fff", letterSpacing: -.4,
+          animation: "float-up .4s ease both",
+        }}>{PHASES[phase]}</div>
+        <button onClick={onClose} style={{
+          pointerEvents: "auto",
+          padding: "12px 22px", borderRadius: 999,
+          background: "rgba(255,255,255,.18)", color: "#fff",
+          border: "1px solid rgba(255,255,255,.4)",
+          fontWeight: 500, fontSize: 14, cursor: "pointer", fontFamily: "inherit",
+          backdropFilter: "blur(6px)",
+        }}>Done</button>
+      </div>
+    </>
+  );
+};
 
 /* ------------------------- Pill / chip / button primitives ------------------------- */
 
@@ -433,10 +656,10 @@ const TopRow = ({ onBack, right, leftExtra }) => (
       {right || (
         <div style={{
           width: 40, height: 40, borderRadius: "50%",
-          background: "var(--purple-50)", display: "grid", placeItems: "center",
-          color: "var(--purple-700)",
+          background: "#fff", display: "grid", placeItems: "center",
+          boxShadow: "0 2px 8px rgba(0,0,0,.08)",
         }}>
-          <IconUser size={22} color="var(--purple-700)" />
+          <IconUser size={22} color="#444" />
         </div>
       )}
     </div>
@@ -475,11 +698,13 @@ Object.assign(window, {
   Icon, IconChevronLeft, IconChevronRight, IconArrowUp, IconArrowUpRight, IconX, IconCheck,
   IconPlus, IconMic, IconSearch, IconUser, IconFlame, IconDollar, IconTrash, IconDrag,
   IconCards, IconPlay, IconSettings, IconSparkle, IconConfetti, IconInfo,
-  IconBars, IconTarget, IconBulb, IconMindspace,
+  IconBars, IconTarget, IconBulb, IconMindspace, IconBookmark,
+  IconNavDashboard, IconNavPlan, IconNavLearn, IconNavMindspace,
   IconGroceries, IconPizza, IconCoffee, IconTransport, IconSmile, IconScale, IconPie, IconBag, IconSwap, IconBack,
   // components
   Mascot, HeroAvatar, EmotionMascot,
-  BottomNav, PhoneFrame, SparkleButton, AIBar, AIOverlay,
+  BottomNav, PhoneFrame, SparkleButton, AIBar, AIOverlay, InfoSheet,
   Pill, PrimaryButton, SecondaryButton, RoundIconBtn, TopRow, Segmented,
+  StatPill, FormatBadge, SourceFooter, MoodLegend, BreathingGuide, MOOD_KEY,
   NAV_ITEMS, iconBtn,
 });

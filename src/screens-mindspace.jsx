@@ -3,63 +3,100 @@
 const TODAY = "Sunday, May 17";
 
 const MOODS = [
-  { v: 0, name: "overwhelmed", color: "rgb(255, 120, 100)", mode: "green" },
-  { v: 1, name: "anxious", color: "var(--teal-300)", mode: "green" },
-  { v: 2, name: "stressed", color: "var(--blue-500)", mode: "blue" },
-  { v: 3, name: "calm", color: "var(--purple-500)", mode: "purple" },
-  { v: 4, name: "balanced", color: "var(--purple-500)", mode: "purple" },
-  { v: 5, name: "hopeful", color: "var(--teal-300)", mode: "purple" },
+  { v: 0, name: "overwhelmed", color: "rgb(220, 60, 60)",   emoji: "😣", mode: "red",
+    palette: ["rgb(255,210,210)", "rgb(255,140,120)", "rgb(220,60,60)", "rgb(180,30,30)"] },
+  { v: 1, name: "anxious",     color: "var(--teal-300)",    emoji: "😟", mode: "green" },
+  { v: 2, name: "stressed",    color: "var(--blue-500)",    emoji: "😩", mode: "blue" },
+  { v: 3, name: "calm",        color: "var(--purple-500)",  emoji: "😌", mode: "purple" },
+  { v: 4, name: "hopeful",     color: "rgb(245, 200, 50)",  emoji: "🙂", mode: "yellow",
+    palette: ["rgb(255,240,180)", "rgb(255,215,90)", "rgb(245,200,50)", "rgb(210,160,30)"] },
 ];
 
 const WEEK_MOODS = [
-  { day: "Mon", color: "var(--teal-300)" },
-  { day: "Tue", color: "var(--purple-500)" },
-  { day: "Wed", color: "var(--blue-500)" },
-  { day: "Thu", color: "var(--teal-300)" },
-  { day: "Fri", color: "var(--purple-500)" },
-  { day: "Sat", color: "var(--teal-300)" },
-  { day: "Sun", color: null, label: "17" },
+  { day: "Mon", mood: "anxious" },
+  { day: "Tue", mood: "calm" },
+  { day: "Wed", mood: "stressed" },
+  { day: "Thu", mood: "anxious" },
+  { day: "Fri", mood: "calm" },
+  { day: "Sat", mood: "hopeful" },
+  { day: "Sun", mood: null, label: "17" },
 ];
+
+const MODE_TO_MOOD = {
+  red: "overwhelmed",
+  green: "anxious",
+  blue: "stressed",
+  purple: "calm",
+  yellow: "hopeful",
+};
 
 /* ───── Screen 1 — Mindspace Home ───── */
 
+const StatChipRow = () => (
+  <div style={{ display: "flex", justifyContent: "center", gap: 8 }}>
+    <div style={{
+      display: "inline-flex", alignItems: "center", gap: 6,
+      background: "#fff", padding: "8px 14px", borderRadius: 999,
+      boxShadow: "0 2px 8px rgba(0,0,0,.05)",
+    }}>
+      <IconDollar size={16} color="var(--navy-900)"/>
+      <span style={{ fontWeight: 700, fontSize: 15, color: "var(--navy-900)" }}>1000</span>
+    </div>
+    <div style={{
+      display: "inline-flex", alignItems: "center", gap: 6,
+      background: "#fff", padding: "8px 14px", borderRadius: 999,
+      boxShadow: "0 2px 8px rgba(0,0,0,.05)",
+    }}>
+      <IconFlame size={16} color="var(--navy-900)"/>
+      <span style={{ fontWeight: 700, fontSize: 15, color: "var(--navy-900)" }}>12</span>
+    </div>
+  </div>
+);
+
 const MindspaceHomeScreen = ({ go, onChangeTab }) => (
-  <div style={{ position: "absolute", inset: 0, background: "#fff", overflow: "hidden" }}>
-    <div style={{ paddingTop: 70, textAlign: "center" }}>
-      <div style={{ fontSize: 17, color: "var(--ink-mute)" }}>{TODAY}</div>
-      <h1 style={{ margin: "10px 22px 0", fontSize: 27, fontWeight: 500, color: "#111", lineHeight: 1.2 }}>
+  <div style={{ position: "absolute", inset: 0, background: "var(--bg-soft)", overflow: "hidden" }}>
+    {/* Point + streak chips */}
+    <div style={{ position: "absolute", left: 0, right: 0, top: 56 }}>
+      <StatChipRow/>
+    </div>
+
+    {/* This week mood tracker */}
+    <div style={{
+      position: "absolute", left: 18, right: 18, top: 116,
+      background: "#fff", borderRadius: 24, padding: 16,
+      boxShadow: "0 4px 16px rgba(0,0,0,.05)",
+    }}>
+      <div style={{ fontWeight: 600, fontSize: 15 }}>This week</div>
+      <div style={{ marginTop: 10, display: "grid", gridTemplateColumns: "repeat(7, 1fr)", gap: 6 }}>
+        {WEEK_MOODS.map(m => (
+          <div key={m.day} style={{ textAlign: "center" }}>
+            {m.mood ? (
+              <img src={`assets/${m.mood}.svg`} alt={m.mood}
+                   style={{ width: 34, height: 34, display: "block", margin: "0 auto" }}/>
+            ) : (
+              <div style={{
+                width: 34, height: 34, borderRadius: "50%", border: "1.5px solid var(--ink-mute)",
+                display: "grid", placeItems: "center", color: "var(--ink-mute)",
+                margin: "0 auto", fontSize: 12, fontWeight: 600,
+              }}>{m.label}</div>
+            )}
+            <div style={{ marginTop: 4, fontSize: 12, color: "#333" }}>{m.day}</div>
+          </div>
+        ))}
+      </div>
+    </div>
+
+    {/* Date + title (moved up) */}
+    <div style={{ position: "absolute", left: 0, right: 0, top: 252, textAlign: "center" }}>
+      <div style={{ fontSize: 16, color: "var(--ink-mute)" }}>{TODAY}</div>
+      <h1 style={{ margin: "6px 22px 0", fontSize: 24, fontWeight: 500, color: "#111", lineHeight: 1.2 }}>
         How are you feeling this afternoon?
       </h1>
     </div>
 
-    <div style={{ marginTop: 6, display: "flex", justifyContent: "center" }}>
-      <DotRing onCheckIn={() => go("mind-checkin")} size={320}/>
-    </div>
-
-    {/* This week mood tracker */}
-    <div style={{ position: "absolute", left: 18, right: 18, bottom: 100,
-                  background: "#fff", borderRadius: 24, padding: 18,
-                  boxShadow: "0 4px 16px rgba(0,0,0,.05)" }}>
-      <div style={{ fontWeight: 600, fontSize: 16 }}>This week</div>
-      <div style={{ marginTop: 12, display: "grid", gridTemplateColumns: "repeat(7, 1fr)", gap: 6 }}>
-        {WEEK_MOODS.map(m => (
-          <div key={m.day} style={{ textAlign: "center" }}>
-            {m.color ? (
-              <div style={{
-                width: 40, height: 40, borderRadius: "50%", background: m.color,
-                margin: "0 auto",
-              }}/>
-            ) : (
-              <div style={{
-                width: 40, height: 40, borderRadius: "50%", border: "1.5px solid var(--ink-mute)",
-                display: "grid", placeItems: "center", color: "var(--ink-mute)",
-                margin: "0 auto", fontSize: 13, fontWeight: 600,
-              }}>{m.label}</div>
-            )}
-            <div style={{ marginTop: 6, fontSize: 13, color: "#333" }}>{m.day}</div>
-          </div>
-        ))}
-      </div>
+    {/* Check-in DotRing */}
+    <div style={{ position: "absolute", left: 0, right: 0, top: 356, display: "flex", justifyContent: "center" }}>
+      <DotRing onCheckIn={() => go("mind-checkin")} size={300}/>
     </div>
 
     <BottomNav active="mindspace" onChange={onChangeTab}/>
@@ -130,18 +167,19 @@ const CheckInScreen = ({ go, onChangeTab, setMode }) => {
     go(`mind-${mood.mode}`);
   };
 
-  // Map mood -> ring color palette
+  // Map mood -> ring color palette (per-mood overrides win)
   const ringPalette = useMemo(() => {
+    if (mood.palette) return mood.palette;
     const map = {
       green: ["var(--teal-100)", "var(--teal-300)", "var(--teal-700)", "rgb(220,225,230)"],
       blue: ["var(--blue-200)", "var(--blue-500)", "var(--blue-700)", "rgb(220,225,230)"],
       purple: ["var(--purple-200)", "var(--purple-500)", "var(--purple-700)", "rgb(220,225,230)"],
     };
     return map[mood.mode];
-  }, [mood.mode]);
+  }, [mood.mode, mood.palette]);
 
   return (
-    <div style={{ position: "absolute", inset: 0, background: "#fff", overflow: "hidden" }}>
+    <div style={{ position: "absolute", inset: 0, background: "var(--bg-soft)", overflow: "hidden" }}>
       <div style={{ position: "absolute", top: 56, left: 16, zIndex: 5 }}>
         <RoundIconBtn onClick={() => go("mind-home")} aria-label="Close"><IconX size={20}/></RoundIconBtn>
       </div>
@@ -159,17 +197,18 @@ const CheckInScreen = ({ go, onChangeTab, setMode }) => {
             position: "absolute", inset: 0, display: "flex", flexDirection: "column",
             alignItems: "center", justifyContent: "center", gap: 6, pointerEvents: "none",
           }}>
-            <div style={{
+            <div key={mood.name} style={{
               animation: "pulse-soft 3s ease-in-out infinite", transition: "all .3s",
             }}>
-              <Mascot size={110} color={mood.color}/>
+              <img src={`assets/${mood.name}.svg`} alt={mood.name}
+                   style={{ width: 130, height: 130, display: "block" }}/>
             </div>
           </div>
         </div>
       </div>
 
       <div style={{ textAlign: "center", marginTop: 16 }}>
-        <div style={{ fontSize: 14, color: "var(--ink-mute)" }}>I'm Feeling</div>
+        <div style={{ fontSize: 14, color: "#111", fontWeight: 500 }}>I'm Feeling</div>
         <div key={mood.name} style={{
           fontSize: 30, fontWeight: 600, color: "#111", marginTop: 4,
           animation: "float-up .25s ease both",
@@ -194,22 +233,32 @@ const CheckInScreen = ({ go, onChangeTab, setMode }) => {
 /* ───── Screens 3-5 — Mode views ───── */
 
 const MODE_DATA = {
+  red: {
+    bg: "linear-gradient(rgb(255, 235, 232) 0%, #fff 50%)",
+    accent: "rgb(220, 60, 60)",
+    palette: ["rgb(255,210,210)", "rgb(255,140,120)", "rgb(220,60,60)", "rgb(180,30,30)"],
+    sparkle: "rgb(180, 30, 30)",
+    cardBg: "rgb(255,242,240)",
+    header: "Feeling overwhelmed?",
+    support: "Pause. Money decisions made under pressure rarely land well. Take 60 seconds, then we'll look at one tiny thing you can do right now.",
+    mascotText: "I'm right here with you",
+    actions: [
+      { label: "Start a 60-second reset", desc: "Slow breathing + body release", icon: IconConfetti, primary: true },
+      { label: "Mute money alerts for today", desc: "Quiet the noise, just for now", icon: IconSettings, primary: false },
+    ],
+  },
   green: {
     bg: "linear-gradient(rgb(230, 246, 244) 0%, #fff 50%)",
     accent: "var(--teal-300)",
     palette: ["var(--teal-100)", "var(--teal-300)", "var(--teal-700)", "rgb(220,225,230)"],
     sparkle: "var(--teal-700)",
     cardBg: "var(--teal-50)",
-    header: "It's natural to feel anxious about money and the future.",
-    support: "You don't need to have everything figured out today. Small, steady actions create long-term stability.",
-    cta: "Listen to calm audio",
-    ctaIcon: <IconPlay size={18} color="#fff"/>,
-    mascotText: "Let's calm down together",
-    features: [
-      { name: "Breathing exercises", icon: IconConfetti },
-      { name: "Grounding practice", icon: IconScale },
-      { name: "Financial reassurance", icon: IconBulb },
-      { name: "Progress reminders", icon: IconCheck },
+    header: "Feeling anxious about money?",
+    support: "You're not alone — even small uncertainties about the future can feel big. Let's ground you in what's already working.",
+    mascotText: "Let's take it one step at a time",
+    actions: [
+      { label: "See your safety net", desc: "Review what's already saved", icon: IconBag, primary: true },
+      { label: "Try a 1-minute grounding exercise", desc: "Calm the body, then the budget", icon: IconConfetti, primary: false },
     ],
   },
   blue: {
@@ -218,15 +267,12 @@ const MODE_DATA = {
     palette: ["var(--blue-200)", "var(--blue-500)", "var(--blue-700)", "rgb(220,225,230)"],
     sparkle: "var(--blue-700)",
     cardBg: "var(--blue-50)",
-    header: "It's okay to feel stressed when numbers shift.",
-    support: "A stressful week doesn't erase your progress. Markets move. Bills happen. You don't have to solve everything today.",
-    cta: "Start box breathing",
-    ctaIcon: <IconPlay size={18} color="#fff"/>,
-    mascotText: "Take 2 minutes to relax",
-    features: [
-      { name: "Box breathing animation", icon: IconConfetti },
-      { name: "Calm timers", icon: IconSettings },
-      { name: "Daily reset", icon: IconCheck },
+    header: "Bills weighing on you?",
+    support: "Stress around bills is a signal, not a verdict. Let's rebuild your plan so the next week feels manageable.",
+    mascotText: "We can sort this out together",
+    actions: [
+      { label: "Rebuild your budget plan", desc: "Adjust categories for this month", icon: IconScale, primary: true },
+      { label: "Start box breathing", desc: "4-minute reset before deciding", icon: IconConfetti, primary: false },
     ],
   },
   purple: {
@@ -235,74 +281,55 @@ const MODE_DATA = {
     palette: ["var(--purple-200)", "var(--purple-500)", "var(--purple-700)", "rgb(220,225,230)"],
     sparkle: "var(--purple-700)",
     cardBg: "var(--purple-50)",
-    header: "You're doing better than you think.",
-    support: "Your financial journey doesn't need to be perfect to be meaningful. Let's slow down and focus on what matters most today.",
-    cta: "Review this week",
-    ctaIcon: <IconBars size={18} color="#fff"/>,
-    mascotText: "Continue mindfully",
-    features: [
-      { name: "Reflection prompts", icon: IconBulb },
-      { name: "Weekly wins", icon: IconCheck },
-      { name: "Gratitude journal", icon: IconCards },
-      { name: "Milestone moments", icon: IconConfetti },
+    header: "You're in a good headspace today",
+    support: "Use this clarity. Lock in a small money goal, or look at the wins from this week while it's fresh.",
+    mascotText: "A good time to plan ahead",
+    actions: [
+      { label: "Set a new savings goal", desc: "Channel today's mood forward", icon: IconTarget, primary: true },
+      { label: "Review this week's wins", desc: "What went right with money", icon: IconCheck, primary: false },
+    ],
+  },
+  yellow: {
+    bg: "linear-gradient(rgb(255, 250, 225) 0%, #fff 55%)",
+    accent: "rgb(245, 200, 50)",
+    palette: ["rgb(255,240,180)", "rgb(255,215,90)", "rgb(245,200,50)", "rgb(210,160,30)"],
+    sparkle: "rgb(180, 130, 20)",
+    cardBg: "rgb(255,248,215)",
+    header: "Feeling hopeful — let's use it",
+    support: "Hope is a great state for setting direction. Plant one small intention today and let the energy work for you.",
+    mascotText: "I love this energy",
+    actions: [
+      { label: "Set a 30-day money intention", desc: "Tiny goal, big momentum", icon: IconTarget, primary: true },
+      { label: "Share a win with a friend", desc: "Multiply the feeling", icon: IconConfetti, primary: false },
     ],
   },
 };
 
 const ModeScreen = ({ go, onChangeTab, mode, openAI }) => {
   const m = MODE_DATA[mode];
-  const [boxBreath, setBoxBreath] = useState(false);
-  const todayColor = m.accent;
+  const [breathOpen, setBreathOpen] = useState(false);
+  const [toast, setToast] = useState("+10 mind points");
+  const todayMood = MODE_TO_MOOD[mode];
+  useEffect(() => {
+    const t = setTimeout(() => setToast(null), 2200);
+    return () => clearTimeout(t);
+  }, []);
+  const handleAction = (a) => {
+    if (a.label.toLowerCase().includes("breath") || a.label.toLowerCase().includes("reset")) setBreathOpen(true);
+    else if (a.label.toLowerCase().includes("budget")) go("logger");
+    else if (a.label.toLowerCase().includes("safety net")) go("dashboard");
+    else { setToast(`Opening: ${a.label}`); setTimeout(() => setToast(null), 1800); }
+  };
   return (
     <div style={{ position: "absolute", inset: 0, background: m.bg, overflow: "hidden" }}>
-      <div style={{ paddingTop: 60, textAlign: "center", padding: "60px 24px 0" }}>
-        <div style={{ fontSize: 17, color: "var(--ink-mute)" }}>{TODAY}</div>
-        <h1 style={{ margin: "12px 0 0", fontSize: 24, fontWeight: 500, color: "#111", lineHeight: 1.3 }}>
-          {m.header}
-        </h1>
+      {/* Point + streak chips */}
+      <div style={{ position: "absolute", left: 0, right: 0, top: 56 }}>
+        <StatChipRow/>
       </div>
 
-      <div style={{ display: "flex", justifyContent: "center", marginTop: 4 }}>
-        <div style={{ position: "relative", display: "grid", placeItems: "center" }}>
-          <DotRing color={m.accent} ringColors={m.palette} size={290} onCheckIn={() => {}} hideCenter/>
-          <div style={{
-            position: "absolute", inset: 0, display: "grid", placeItems: "center", pointerEvents: "none",
-          }}>
-            <div style={{
-              animation: boxBreath ? "pulse-soft 4s ease-in-out infinite" : "pulse-soft 5s ease-in-out infinite",
-            }}>
-              <Mascot size={110} color={m.accent}/>
-            </div>
-          </div>
-        </div>
-      </div>
-
+      {/* This week strip */}
       <div style={{
-        textAlign: "center", fontSize: 17, fontWeight: 500, color: "#111", marginTop: 8,
-      }}>{m.mascotText}</div>
-
-      {/* Support card with CTA */}
-      <div style={{
-        position: "absolute", left: 18, right: 18, bottom: 218,
-        background: m.cardBg, borderRadius: 18, padding: 16,
-      }}>
-        <p style={{ margin: 0, fontSize: 14, lineHeight: 1.45, color: "#111" }}>{m.support}</p>
-        <div style={{ marginTop: 14, display: "flex", gap: 10, alignItems: "center" }}>
-          <button onClick={() => setBoxBreath(b => !b)} style={{
-            flex: 1, padding: "14px", borderRadius: 999, border: 0,
-            background: m.accent, color: "#fff", fontWeight: 600, fontSize: 15,
-            cursor: "pointer", display: "inline-flex", justifyContent: "center", alignItems: "center", gap: 8,
-            fontFamily: "inherit",
-          }}>
-            {m.ctaIcon} {m.cta}
-          </button>
-          <SparkleButton onClick={openAI} floating={false} color={m.sparkle}/>
-        </div>
-      </div>
-
-      {/* This week streak — today highlighted in mode color */}
-      <div style={{
-        position: "absolute", left: 18, right: 18, bottom: 100,
+        position: "absolute", left: 18, right: 18, top: 116,
         background: "rgba(255,255,255,.85)", borderRadius: 18, padding: 14,
         boxShadow: "0 4px 16px rgba(0,0,0,.04)", backdropFilter: "blur(8px)",
       }}>
@@ -313,23 +340,113 @@ const ModeScreen = ({ go, onChangeTab, mode, openAI }) => {
         <div style={{ marginTop: 10, display: "grid", gridTemplateColumns: "repeat(7, 1fr)", gap: 4 }}>
           {WEEK_MOODS.map((d, i) => {
             const isToday = d.day === "Sun";
-            const color = isToday ? todayColor : d.color;
+            const moodName = isToday ? todayMood : d.mood;
             return (
               <div key={d.day} style={{ textAlign: "center" }}>
-                <div style={{
-                  width: 28, height: 28, borderRadius: "50%",
-                  background: color || "transparent",
-                  border: color ? 0 : "1.5px solid var(--ink-mute)",
-                  margin: "0 auto",
-                  display: "grid", placeItems: "center",
-                  color: "#fff", fontSize: 11, fontWeight: 600,
-                }}>{isToday && "✓"}</div>
+                {moodName ? (
+                  <img src={`assets/${moodName}.svg`} alt={moodName}
+                       style={{ width: 28, height: 28, display: "block", margin: "0 auto" }}/>
+                ) : (
+                  <div style={{
+                    width: 28, height: 28, borderRadius: "50%",
+                    border: "1.5px solid var(--ink-mute)",
+                    margin: "0 auto",
+                  }}/>
+                )}
                 <div style={{ marginTop: 4, fontSize: 11, color: "#333" }}>{d.day}</div>
               </div>
             );
           })}
         </div>
       </div>
+
+      {/* Header */}
+      <div style={{ position: "absolute", left: 0, right: 0, top: 240, textAlign: "center", padding: "0 24px" }}>
+        <div style={{ fontSize: 14, color: "var(--ink-mute)" }}>{TODAY}</div>
+        <h1 style={{ margin: "4px 0 0", fontSize: 22, fontWeight: 500, color: "#111", lineHeight: 1.25 }}>
+          {m.header}
+        </h1>
+      </div>
+
+      {/* DotRing + Mascot — pushed down so particles don't crowd the title; ratio matches Check-in */}
+      <div style={{ position: "absolute", left: 0, right: 0, top: 340, display: "flex", justifyContent: "center" }}>
+        <div style={{ position: "relative", display: "grid", placeItems: "center" }}>
+          <DotRing color={m.accent} ringColors={m.palette} size={200} onCheckIn={() => {}} hideCenter/>
+          <div style={{
+            position: "absolute", inset: 0, display: "grid", placeItems: "center", pointerEvents: "none",
+          }}>
+            <div style={{ animation: "pulse-soft 5s ease-in-out infinite" }}>
+              <Mascot size={68} color={m.accent}/>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Speech bubble from mascot — placed right below mascot; OK to overlap lower particles */}
+      <div style={{
+        position: "absolute", left: 36, right: 36, top: 482,
+        background: "#fff", borderRadius: 16, padding: "10px 14px",
+        boxShadow: "0 4px 14px rgba(0,0,0,.10)",
+        border: `1px solid ${m.cardBg}`,
+        zIndex: 5,
+      }}>
+        <div style={{ fontSize: 13, lineHeight: 1.4, color: "#111" }}>{m.support}</div>
+        {/* Speech bubble tail pointing up at the mascot */}
+        <div style={{
+          position: "absolute", top: -8, left: "50%", marginLeft: -8,
+          width: 0, height: 0,
+          borderLeft: "8px solid transparent",
+          borderRight: "8px solid transparent",
+          borderBottom: "8px solid #fff",
+        }}/>
+      </div>
+
+      {/* Suggested actions card */}
+      <div style={{
+        position: "absolute", left: 18, right: 18, bottom: 100,
+        background: m.cardBg, borderRadius: 18, padding: 14,
+      }}>
+        <div style={{
+          fontSize: 14, fontWeight: 600, color: "#111",
+          marginBottom: 10, paddingLeft: 4,
+        }}>Suggested actions</div>
+        <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
+          {m.actions.map((a, i) => (
+            <button key={i} onClick={() => handleAction(a)} style={{
+              display: "flex", alignItems: "center", gap: 10,
+              padding: a.primary ? "12px 14px" : "10px 14px", borderRadius: 14, border: 0,
+              background: a.primary ? m.accent : "#fff",
+              color: a.primary ? "#fff" : "#111",
+              cursor: "pointer", fontFamily: "inherit", textAlign: "left",
+              boxShadow: a.primary ? "0 6px 18px rgba(0,0,0,.10)" : "0 1px 3px rgba(0,0,0,.05)",
+            }}>
+              <span style={{
+                width: 30, height: 30, borderRadius: "50%",
+                background: a.primary ? "rgba(255,255,255,.22)" : m.cardBg,
+                display: "grid", placeItems: "center", flex: "none",
+              }}><a.icon size={16} color={a.primary ? "#fff" : m.accent}/></span>
+              <div style={{ flex: 1 }}>
+                <div style={{ fontSize: 14, fontWeight: 600 }}>{a.label}</div>
+                <div style={{ fontSize: 11, opacity: .8, marginTop: 1 }}>{a.desc}</div>
+              </div>
+              <IconChevronRight size={16} color={a.primary ? "#fff" : "var(--ink-mute)"}/>
+            </button>
+          ))}
+        </div>
+      </div>
+
+      {toast && (
+        <div style={{
+          position: "absolute", top: 200, left: "50%",
+          background: "rgba(0,0,0,.85)", color: "#fff",
+          padding: "8px 16px", borderRadius: 999,
+          fontSize: 13, fontWeight: 600, zIndex: 80,
+          animation: "toast-in .25s ease both",
+          whiteSpace: "nowrap",
+        }}>{toast}</div>
+      )}
+
+      <BreathingGuide open={breathOpen} onClose={() => setBreathOpen(false)}/>
 
       <BottomNav active="mindspace" onChange={onChangeTab}/>
     </div>

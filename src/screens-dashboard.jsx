@@ -23,6 +23,27 @@ const PERIODS = [
   { value: "year",  label: "Yearly Summary",  date: "2026",                  budgetAmt: 15000, budgetLabel: "yearly budget",  spent: sum(YEARLY_DATA),  trackStatus: "on",     trackText: "On track" },
 ];
 
+/* Voice + scan-receipt actions for the add-spending TopRow */
+const AddSpendingActions = () => {
+  const btn = {
+    width: 40, height: 40, borderRadius: "50%",
+    background: "#fff", border: 0, cursor: "pointer",
+    display: "grid", placeItems: "center",
+    boxShadow: "0 2px 8px rgba(0,0,0,.08)",
+    fontFamily: "inherit",
+  };
+  return (
+    <div style={{ display: "flex", gap: 8 }}>
+      <button aria-label="Add by voice" style={btn}>
+        <IconMic size={20} color="#444"/>
+      </button>
+      <button aria-label="Scan receipt" style={btn}>
+        <IconScan size={20} color="#444"/>
+      </button>
+    </div>
+  );
+};
+
 const TrackBadge = ({ status, text }) => {
   const on = status === "on";
   return (
@@ -522,7 +543,7 @@ const BudgetLoggerScreen = ({ go, onChangeTab, categoryId }) => {
 
   return (
     <div style={{ position: "absolute", inset: 0, background: "var(--bg-soft)", overflow: "hidden" }}>
-      <TopRow onBack={() => go("spending")}/>
+      <TopRow onBack={() => go("spending")} right={<AddSpendingActions/>}/>
       <div style={{ padding: "12px 18px 120px", height: "calc(100% - 96px)", overflowY: "auto" }} className="no-scrollbar">
         <Pill style={{ background: "var(--teal-50)", color: "var(--teal-700)" }}>
           <cat.icon size={14} color="var(--teal-700)"/> {cat.name}
@@ -637,7 +658,7 @@ const BudgetLoggerScreen = ({ go, onChangeTab, categoryId }) => {
 
 const CategoryPickerScreen = ({ go, onChangeTab, openCategory }) => (
   <div style={{ position: "absolute", inset: 0, background: "var(--bg-soft)", overflow: "hidden" }}>
-    <TopRow onBack={() => go("spending")}/>
+    <TopRow onBack={() => go("spending")} right={<AddSpendingActions/>}/>
     <div style={{ padding: "12px 18px 120px", height: "calc(100% - 96px)", overflowY: "auto" }} className="no-scrollbar">
       <h1 style={{ margin: 0, fontWeight: 500, fontSize: 28, letterSpacing: -0.4 }}>Add a spend</h1>
       <p style={{ margin: "6px 0 0", fontSize: 14, color: "var(--ink-soft)" }}>

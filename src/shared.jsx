@@ -151,6 +151,13 @@ const IconSwap = (p) => <Icon {...p}>
 const IconBookmark = ({ filled = false, ...p }) => <Icon {...p} fill={filled ? "currentColor" : "none"}>
   <path d="M6 4a1 1 0 0 1 1-1h10a1 1 0 0 1 1 1v17l-6-4-6 4V4Z" />
 </Icon>;
+const IconScan = (p) => <Icon {...p}>
+  <path d="M3 7V5a2 2 0 0 1 2-2h2"/>
+  <path d="M17 3h2a2 2 0 0 1 2 2v2"/>
+  <path d="M21 17v2a2 2 0 0 1-2 2h-2"/>
+  <path d="M7 21H5a2 2 0 0 1-2-2v-2"/>
+  <line x1="3" y1="12" x2="21" y2="12"/>
+</Icon>;
 const IconBack = IconChevronLeft;
 
 /* ------------------------- Mascot ------------------------- */
@@ -698,7 +705,7 @@ Object.assign(window, {
   Icon, IconChevronLeft, IconChevronRight, IconArrowUp, IconArrowUpRight, IconX, IconCheck,
   IconPlus, IconMic, IconSearch, IconUser, IconFlame, IconDollar, IconTrash, IconDrag,
   IconCards, IconPlay, IconSettings, IconSparkle, IconConfetti, IconInfo,
-  IconBars, IconTarget, IconBulb, IconMindspace, IconBookmark,
+  IconBars, IconTarget, IconBulb, IconMindspace, IconBookmark, IconScan,
   IconNavDashboard, IconNavPlan, IconNavLearn, IconNavMindspace,
   IconGroceries, IconPizza, IconCoffee, IconTransport, IconSmile, IconScale, IconPie, IconBag, IconSwap, IconBack,
   // components
